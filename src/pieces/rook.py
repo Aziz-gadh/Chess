@@ -4,9 +4,9 @@ import pygame as pg
 
 class Rook(Piece):
     def __init__(self,square,isWhite):
-        self.image=pg.image.load('assets/images/rook.png').convert_alpha()
+        self.type='wr' if isWhite else 'br'
+        self.image=pg.image.load('assets/images/'+self.type+'.png').convert_alpha()
         self.image=pg.transform.scale(self.image,square.rect.size)
-        self.type='rook'
         super().__init__(square,isWhite)
     def defineMovement(self,square):
         freedom=[]

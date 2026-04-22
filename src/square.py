@@ -29,3 +29,4 @@ class Square(pg.sprite.Sprite):
                 self.image.fill(white_square_color_selected)
         else:
             self.image.fill(self.color)
+#Change this awful mechenic

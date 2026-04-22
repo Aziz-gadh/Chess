@@ -14,8 +14,8 @@ for i in range(8):
         grid[i].append(Square(i,chr(j+ord('a'))))
         board.add(grid[i][j])
 pieces.add(Rook(grid[0][0],False))
-pieces.add(Rook(grid[0][7],False))
-pieces.add(Rook(grid[7][0],True))
+pieces.add(Rook(grid[0][7],True))
+pieces.add(Rook(grid[7][0],False))
 pieces.add(Rook(grid[7][7],True))
 while running:
     for event in pg.event.get():
@@ -24,11 +24,22 @@ while running:
         elif event.type==pg.MOUSEBUTTONDOWN:
             if selectSquare:
                 selectSquare.selected=False
-            mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
-            if mouse_position[0] in range(8) and mouse_position[1] in range(8):
-                selectSquare=grid[mouse_position[0]][mouse_position[1]]
-            if selectSquare:
-                selectSquare.selected=True
+                if not selectSquare.rect.collidepoint(pg.mouse.get_pos()):
+                    mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
+                    if mouse_position[0] in range(8) and mouse_position[1] in range(8):
+                        selectSquare=grid[mouse_position[0]][mouse_position[1]]
+                    else:
+                        selectSquare=None
+                    if selectSquare:
+                        selectSquare.selected=True
+            else:
+                mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
+                if mouse_position[0] in range(8) and mouse_position[1] in range(8):
+                    selectSquare=grid[mouse_position[0]][mouse_position[1]]
+                else:
+                    selectSquare=None
+                if selectSquare:
+                    selectSquare.selected=True
     board.update()
     board.draw(screen)
     pieces.draw(screen)
