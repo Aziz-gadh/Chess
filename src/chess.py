@@ -1,6 +1,6 @@
 import pygame as pg
-from square import Square
-from settings import board_side,FPS,board,margin,side
+from src.square import Square
+from src.settings import board_side,FPS,board,margin,side
 pg.init()
 running=True
 clock=pg.time.Clock()
