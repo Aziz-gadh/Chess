@@ -1,5 +1,5 @@
 import pygame as pg
-from src.settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected
+from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected
 class Square(pg.sprite.Sprite):
     def __init__(self,n,a):
         super().__init__()
