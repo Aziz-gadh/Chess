@@ -14,13 +14,9 @@ class Square(pg.sprite.Sprite):
         self.piece=None
     def mark(self):
         if self.piece:
-            marker=pg.Surface((side,side),depth=5)
-            marker.fill('#fd0210')
+            pg.draw.rect(self.image,(240,20,80,100),(0,0,side,side),20)
         else:
-            marker=pg.Surface((side,side),pg.SRCALPHA)
-            pg.draw.circle(marker,(0,0,0,0.5),self.rect.center,side/2)
-            marker.convert_alpha()
-        self.image.blit(marker,self.rect)
+            pg.draw.circle(self.image,(0,0,0,100),(side//2,side//2),side//2)
     def update(self):
         if self.selected:
             if self.isBlack:
@@ -29,4 +25,4 @@ class Square(pg.sprite.Sprite):
                 self.image.fill(white_square_color_selected)
         else:
             self.image.fill(self.color)
-#Change this awful mechenic
+#Change this awful mechenic!!!!!!!!!!

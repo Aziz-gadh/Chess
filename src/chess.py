@@ -18,6 +18,7 @@ pieces.add(Rook(grid[0][7],True))
 pieces.add(Rook(grid[7][0],False))
 pieces.add(Rook(grid[7][7],True))
 while running:
+    board.update()
     for event in pg.event.get():
         if event.type==pg.QUIT:
             running=False
@@ -32,6 +33,10 @@ while running:
                         selectSquare=None
                     if selectSquare:
                         selectSquare.selected=True
+                        if selectSquare.piece:
+                            selectSquare.piece.select()
+                else:
+                    selectSquare=None
             else:
                 mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
                 if mouse_position[0] in range(8) and mouse_position[1] in range(8):
@@ -40,7 +45,8 @@ while running:
                     selectSquare=None
                 if selectSquare:
                     selectSquare.selected=True
-    board.update()
+                    if selectSquare.piece:
+                        selectSquare.piece.select()
     board.draw(screen)
     pieces.draw(screen)
     pg.display.update()
