@@ -6,7 +6,7 @@ pg.init()
 running=True
 clock=pg.time.Clock()
 pg.display.set_caption('CHESS')
-screen=pg.display.set_mode((board_side+margin[0]*2,board_side+margin[1]*2))
+screen=pg.display.set_mode((board_side+margin[0]*2,board_side+margin[1]*2),pg.SRCALPHA)
 selectSquare=None
 for i in range(8):
     grid.append([])
@@ -25,18 +25,11 @@ while running:
             if selectSquare:
                 selectSquare.unselect()
                 selectSquare.unmark()
-                if not selectSquare.rect.collidepoint(pg.mouse.get_pos()):
-                    mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
-                    if mouse_position[0] in range(8) and mouse_position[1] in range(8):
-                        selectSquare=grid[mouse_position[0]][mouse_position[1]]
-                    else:
-                        selectSquare=None
-                    if selectSquare:
-                        selectSquare.select()
-                else:
+            mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
+            if selectSquare==grid[mouse_position[0]][mouse_position[1]]:
                     selectSquare=None
+                    continue
             else:
-                mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
                 if mouse_position[0] in range(8) and mouse_position[1] in range(8):
                     selectSquare=grid[mouse_position[0]][mouse_position[1]]
                 else:
