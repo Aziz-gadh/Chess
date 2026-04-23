@@ -18,3 +18,6 @@ class Piece(pg.sprite.Sprite,ABC):
     def select(self):
         for square in self.freedom:
             square.mark()
+    def unselect(self):
+        for square in self.freedom:
+            square.unselect()

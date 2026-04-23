@@ -16,7 +16,7 @@ class Rook(Piece):
         if abs!=8:
             freedom.append(primary_hor[abs])
         abs=square.abs-1
-        while (abs>=0 and not primary_hor[abs].piece):
+        while (abs>-1 and not primary_hor[abs].piece):
             freedom.append(primary_hor[abs])
             abs-=1
         if abs!=-1:
@@ -28,7 +28,7 @@ class Rook(Piece):
         if ord!=8:
             freedom.append(primary_ver[ord])
         ord=square.ord-1
-        while (ord>=0 and not primary_ver[abs].piece):
+        while (ord>-1 and not primary_ver[abs].piece):
             freedom.append(primary_ver[abs])
             ord-=1
         if ord!=-1:
