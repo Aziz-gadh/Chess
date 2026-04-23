@@ -9,28 +9,32 @@ class Rook(Piece):
         freedom=[]
         primary_hor=grid[square.ord]
         primary_ver=[ls[square.abs] for ls in grid]
-        abs=square.abs+1
-        while (abs<8 and not primary_hor[abs].piece):
+        for abs in range(square.abs+1,8):
             freedom.append(primary_hor[abs])
-            abs+=1
-        if abs!=8:
+            if freedom[-1].piece and freedom[-1].piece.type[0]!=self.type[0]:
+                break
+            elif freedom[-1].piece and freedom[-1].piece.type[0]==self.type[0]:
+                freedom.pop()
+                break
+        for abs in range(square.abs-1,-1,-1):
             freedom.append(primary_hor[abs])
-        abs=square.abs-1
-        while (abs>-1 and not primary_hor[abs].piece):
-            freedom.append(primary_hor[abs])
-            abs-=1
-        if abs!=-1:
-            freedom.append(primary_hor[abs])
-        ord=square.ord+1
-        while (ord<8 and not primary_ver[ord].piece):
+            if freedom[-1].piece and freedom[-1].piece.type[0]!=self.type[0]:
+                break
+            elif freedom[-1].piece and freedom[-1].piece.type[0]==self.type[0]:
+                freedom.pop()
+                break
+        for ord in range(square.ord+1,8):
             freedom.append(primary_ver[ord])
-            ord+=1
-        if ord!=8:
+            if freedom[-1].piece and freedom[-1].piece.type[0]!=self.type[0]:
+                break
+            elif freedom[-1].piece and freedom[-1].piece.type[0]==self.type[0]:
+                freedom.pop()
+                break
+        for ord in range(square.ord-1,-1,-1):
             freedom.append(primary_ver[ord])
-        ord=square.ord-1
-        while (ord>-1 and not primary_ver[ord].piece):
-            freedom.append(primary_ver[ord])
-            ord-=1
-        if ord!=-1:
-            freedom.append(primary_ver[ord])
+            if freedom[-1].piece and freedom[-1].piece.type[0]!=self.type[0]:
+                break
+            elif freedom[-1].piece and freedom[-1].piece.type[0]==self.type[0]:
+                freedom.pop()
+                break
         return freedom

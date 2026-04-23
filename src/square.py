@@ -14,11 +14,11 @@ class Square(pg.sprite.Sprite):
         self.colorSelect=black_square_color_selected if self.isBlack else white_square_color_selected
         self.piece=None
     def mark(self):
-        overlay = pg.Surface((side, side), pg.SRCALPHA)  # fresh transparent surface
+        overlay = pg.Surface((side, side), pg.SRCALPHA)
         if self.piece:
-            pg.draw.circle(overlay, (0, 0, 0, 83), (side//2, side//2), side*3//8, 5)
+            pg.draw.circle(overlay, (0, 0, 0, 60), (side//2, side//2), side*3//8, 5)
         else:
-            pg.draw.circle(overlay, (0, 0, 0, 83), (side//2, side//2), side//4)
+            pg.draw.circle(overlay, (0, 0, 0, 60), (side//2, side//2), side//5)
         self.image.blit(overlay, (0, 0))
     def select(self):
         self.image.fill(self.colorSelect)
