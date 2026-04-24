@@ -1,6 +1,6 @@
 from .piece import Piece
-from ..settings import grid,horsee
-
+from ..settings import grid
+horsee=[(i,j) for i in range(-2,3) for j in range(-2,3) if (i*j and abs(i)+abs(j)==3)]
 class Knight(Piece):
     def __init__(self,square,isWhite):
         super().__init__(square,isWhite,'n')

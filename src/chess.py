@@ -1,16 +1,16 @@
 import pygame as pg
 from .square import Square
-from .settings import board_side,FPS,board,margin,side,grid,pieces,state
+from .settings import board_side,FPS,board,margin,side,grid,pieces,state,selectSquare
 from .pieces.rook import Rook
 from .pieces.bishop import Bishop
 from .pieces.queen import Queen
 from .pieces.knight import Knight
+from .pieces.king import King
 pg.init()
 running=True
 clock=pg.time.Clock()
 pg.display.set_caption('CHESS')
 screen=pg.display.set_mode((board_side+margin[0]*2,board_side+margin[1]*2))
-selectSquare=None
 for i in range(8):
     grid.append([])
     for j in range(8):
@@ -30,6 +30,8 @@ pieces.add(Knight(grid[6][0],False))
 pieces.add(Knight(grid[6][7],True))
 pieces.add(Queen(grid[3][7],True))
 pieces.add(Queen(grid[3][0],False))
+pieces.add(King(grid[4][7],True))
+pieces.add(King(grid[4][0],False))
 while running:
     for event in pg.event.get():
         if event.type==pg.QUIT:
