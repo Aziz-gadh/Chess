@@ -1,11 +1,11 @@
 from .piece import Piece
 from ..settings import grid
-import pygame as pg
 
 class Rook(Piece):
     def __init__(self,square,isWhite):
         super().__init__(square,isWhite,'r')
         self.value=5
+        self.hasMoved=False
     def defineMovement(self,square):
         freedom=[]
         primary_hor=grid[square.ord]
@@ -39,3 +39,6 @@ class Rook(Piece):
                 freedom.pop()
                 break
         return freedom
+    def move(self,square):
+        super().move(square)
+        self.hasMoved=True

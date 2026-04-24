@@ -4,6 +4,7 @@ from .settings import board_side,FPS,board,margin,side,grid,pieces,state
 from .pieces.rook import Rook
 from .pieces.bishop import Bishop
 from .pieces.queen import Queen
+from .pieces.knight import Knight
 pg.init()
 running=True
 clock=pg.time.Clock()
@@ -23,6 +24,10 @@ pieces.add(Bishop(grid[2][0],False))
 pieces.add(Bishop(grid[5][0],False))
 pieces.add(Bishop(grid[2][7],True))
 pieces.add(Bishop(grid[5][7],True))
+pieces.add(Knight(grid[1][0],False))
+pieces.add(Knight(grid[1][7],True))
+pieces.add(Knight(grid[6][0],False))
+pieces.add(Knight(grid[6][7],True))
 pieces.add(Queen(grid[3][7],True))
 pieces.add(Queen(grid[3][0],False))
 while running:

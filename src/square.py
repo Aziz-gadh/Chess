@@ -34,7 +34,7 @@ class Square(pg.sprite.Sprite):
                 self.piece.kill()
             selectedPiece.move(self)
             state-=2
-            state^=1
+            state=state^1
             openMnt=[]
             selectedPiece=None
         elif (state & 2) and self not in openMnt:

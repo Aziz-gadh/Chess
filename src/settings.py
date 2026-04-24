@@ -20,3 +20,4 @@ score=0
 # 2: 0 no check | 1 check
 # 3: 0 didn't select | 1 selected
 # 4: 0 white to play | 1 black to play
+horsee=[(i,j) for i in range(-2,3) for j in range(-2,3) if (i*j and abs(i)+abs(j)==3)]
