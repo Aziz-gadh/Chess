@@ -1,5 +1,5 @@
 import pygame as pg
-from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected,state,openMnt,selectedPiece,score
+from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected,state,openMnt,selectedPiece,score,pieces
 from .pieces.piece import Piece
 class Square(pg.sprite.Sprite):
     def __init__(self,n,a):
@@ -30,15 +30,23 @@ class Square(pg.sprite.Sprite):
             state+=2
             openMnt=self.piece.freedom
         elif (state & 2) and self in openMnt:
-            if self.piece:
-                score+=self.piece.value*((-1)**(self.piece.type[0]=='w'))
-                self.piece.kill()
             selectedPiece.move(self)
-            state-=2
-            state=state^1
             Piece.defineAll()
-            openMnt=[]
-            selectedPiece=None
+            for piece in pieces:
+                piece.check()
+            if selectedPiece.king.inCheck:
+                selectedPiece.move(selectedPiece.prevSpot)
+                state-=2
+            else:
+                if self.piece:
+                    score+=self.piece.value*((-1)**(self.piece.type[0]=='w'))
+                    self.piece.kill()
+                state-=2
+                state=state^1
+                Piece.defineAll()
+                openMnt=[]
+                self.piece=selectedPiece
+                selectedPiece=None
         elif (state & 2) and self not in openMnt:
             if not self.piece:
                 state-=2

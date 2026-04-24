@@ -12,7 +12,7 @@ class King(Piece):
         freedom=[grid[coor[0]][coor[1]] for coor in freedomPoints]
         notfreedom=[sq for sq in freedom if (sq.piece and sq.piece.type[0]==self.type[0])]
         freedom=list(set(freedom)-set(notfreedom))
-        stopped={sq for sq in [p.freedom for p in pieces] if sq in freedom}
+        stopped={sq for sq in [p.freedom for p in pieces if self.type[0]!=p.type[0]] if sq in freedom}
         freedom=list(set(freedom)-stopped)
         return freedom
     def move(self,square):

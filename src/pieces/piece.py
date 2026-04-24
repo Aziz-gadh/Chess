@@ -13,6 +13,11 @@ class Piece(pg.sprite.Sprite,ABC):
         self.square=square
         self.freedom=[]
         square.piece=self
+        self.prevSpot=None
+        if self.type[1]!='k':
+            self.king=[piece for piece in pieces if piece.type[1]=='k' and piece.type[0]==self.type[0]].pop()
+        else:
+            self.king=self
     @abstractmethod
     def defineMovement(self,square):
         pass
@@ -26,19 +31,18 @@ class Piece(pg.sprite.Sprite,ABC):
         self.selected=False
     def move(self,square):
         self.square.piece=None
+        self.prevSpot=self.square
         self.rect=square.rect
         self.square=square
-        square.piece=self
         self.check()
     def check(self):
         global state
         self.freedom=self.defineMovement(self.square)
         for sq in self.freedom:
-            if sq.piece and sq.piece.type[1]=='k' and sq.piece.type[0]==self.type[0]:
+            if sq.piece and sq.piece.type[1]=='k':
                 state+=4
                 sq.image.fill('#ff0011')
                 sq.piece.inCheck=True
-                break
     @staticmethod
     def defineAll():
         for piece in pieces:

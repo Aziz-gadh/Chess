@@ -17,6 +17,8 @@ for i in range(8):
     for j in range(8):
         grid[i].append(Square(i,chr(j+ord('a'))))
         board.add(grid[i][j])
+pieces.add(King(grid[4][7],True))
+pieces.add(King(grid[4][0],False))
 pieces.add(Rook(grid[0][0],False))
 pieces.add(Rook(grid[0][7],True))
 pieces.add(Rook(grid[7][0],False))
@@ -31,8 +33,6 @@ pieces.add(Knight(grid[6][0],False))
 pieces.add(Knight(grid[6][7],True))
 pieces.add(Queen(grid[3][7],True))
 pieces.add(Queen(grid[3][0],False))
-pieces.add(King(grid[4][7],True))
-pieces.add(King(grid[4][0],False))
 Piece.defineAll()
 while running:
     for event in pg.event.get():
