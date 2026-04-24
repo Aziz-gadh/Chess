@@ -6,6 +6,7 @@ from .pieces.bishop import Bishop
 from .pieces.queen import Queen
 from .pieces.knight import Knight
 from .pieces.king import King
+from .pieces.piece import Piece
 pg.init()
 running=True
 clock=pg.time.Clock()
@@ -32,6 +33,7 @@ pieces.add(Queen(grid[3][7],True))
 pieces.add(Queen(grid[3][0],False))
 pieces.add(King(grid[4][7],True))
 pieces.add(King(grid[4][0],False))
+Piece.defineAll()
 while running:
     for event in pg.event.get():
         if event.type==pg.QUIT:

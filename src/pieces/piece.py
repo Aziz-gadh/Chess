@@ -1,6 +1,6 @@
 import pygame as pg
 from abc import abstractmethod,ABC
-from ..settings import state
+from ..settings import state,pieces
 
 class Piece(pg.sprite.Sprite,ABC):
     def __init__(self,square,isWhite,type):
@@ -17,7 +17,6 @@ class Piece(pg.sprite.Sprite,ABC):
     def defineMovement(self,square):
         pass
     def select(self):
-        self.freedom=self.defineMovement(self.square)
         for square in self.freedom:
             square.mark()
         self.selected=True
@@ -40,3 +39,7 @@ class Piece(pg.sprite.Sprite,ABC):
                 sq.image.fill('#ff0011')
                 sq.piece.inCheck=True
                 break
+    @staticmethod
+    def defineAll():
+        for piece in pieces:
+            piece.freedom=piece.defineMovement(piece.square)

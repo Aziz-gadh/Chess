@@ -1,5 +1,6 @@
 import pygame as pg
 from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected,state,openMnt,selectedPiece,score
+from .pieces.piece import Piece
 class Square(pg.sprite.Sprite):
     def __init__(self,n,a):
         super().__init__()
@@ -35,6 +36,7 @@ class Square(pg.sprite.Sprite):
             selectedPiece.move(self)
             state-=2
             state=state^1
+            Piece.defineAll()
             openMnt=[]
             selectedPiece=None
         elif (state & 2) and self not in openMnt:
