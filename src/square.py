@@ -1,5 +1,5 @@
 import pygame as pg
-from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected,state,openMnt,selectedPiece
+from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected,state,openMnt,selectedPiece,score
 class Square(pg.sprite.Sprite):
     def __init__(self,n,a):
         super().__init__()
@@ -21,7 +21,7 @@ class Square(pg.sprite.Sprite):
             pg.draw.circle(overlay, (0, 0, 0, 60), (side//2, side//2), side//5)
         self.image.blit(overlay, (0, 0))
     def select(self):
-        global state,openMnt,selectedPiece
+        global state,openMnt,selectedPiece,score
         self.image.fill(self.colorSelect)
         if self.piece and (self.piece.type[0]=='w')^(state & 1) and not (state & 2):
             self.piece.select()
@@ -30,6 +30,7 @@ class Square(pg.sprite.Sprite):
             openMnt=self.piece.freedom
         elif (state & 2) and self in openMnt:
             if self.piece:
+                score+=self.piece.value*((-1)**(self.piece.type[0]=='w'))
                 self.piece.kill()
             selectedPiece.move(self)
             state-=2

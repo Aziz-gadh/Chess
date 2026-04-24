@@ -14,6 +14,7 @@ grid=[]
 openMnt=[]
 selectedPiece=None
 state=0
+score=0
 # state=0b11234
 # 1: 00 plying | 01 white wins | 10 black wins | 11 draw 
 # 2: 0 no check | 1 check

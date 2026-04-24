@@ -5,6 +5,7 @@ import pygame as pg
 class Rook(Piece):
     def __init__(self,square,isWhite):
         super().__init__(square,isWhite,'r')
+        self.value=5
     def defineMovement(self,square):
         freedom=[]
         primary_hor=grid[square.ord]

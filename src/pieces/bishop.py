@@ -4,6 +4,7 @@ from ..settings import grid
 class Bishop(Piece):
     def __init__(self,square,isWhite):
         super().__init__(square,isWhite,'b')
+        self.value=3
     def defineMovement(self,square):
         freedom=[]
         j,i=square.abs+1,square.ord+1
