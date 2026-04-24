@@ -40,6 +40,12 @@ class Square(pg.sprite.Sprite):
         elif (state & 2) and self not in openMnt:
             if not self.piece:
                 state-=2
+            else:
+                self.piece.select()
+                selectedPiece=self.piece
+                state+=2
+                openMnt=self.piece.freedom
+
     def unselect(self):
         self.image.fill(self.color)
     def unmark(self):
