@@ -1,5 +1,5 @@
 import pygame as pg
-from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected
+from .settings import side,black_square_color,white_square_color,margin,white_square_color_selected,black_square_color_selected,state,openMnt,selectedPiece
 class Square(pg.sprite.Sprite):
     def __init__(self,n,a):
         super().__init__()
@@ -16,14 +16,29 @@ class Square(pg.sprite.Sprite):
     def mark(self):
         overlay = pg.Surface((side, side), pg.SRCALPHA)
         if self.piece:
-            pg.draw.circle(overlay, (0, 0, 0, 60), (side//2, side//2), side*3//8, 5)
+            pg.draw.circle(overlay, (0, 0, 0, 60), (side//2, side//2), side//2, 5)
         else:
             pg.draw.circle(overlay, (0, 0, 0, 60), (side//2, side//2), side//5)
         self.image.blit(overlay, (0, 0))
     def select(self):
+        global state,openMnt,selectedPiece
         self.image.fill(self.colorSelect)
-        if self.piece:
+        if self.piece and (self.piece.type[0]=='w')^(state & 1) and not (state & 2):
             self.piece.select()
+            selectedPiece=self.piece
+            state+=2
+            openMnt=self.piece.freedom
+        elif (state & 2) and self in openMnt:
+            if self.piece:
+                self.piece.kill()
+            selectedPiece.move(self)
+            state-=2
+            state^=1
+            openMnt=[]
+            selectedPiece=None
+        elif (state & 2) and self not in openMnt:
+            if not self.piece:
+                state-=2
     def unselect(self):
         self.image.fill(self.color)
     def unmark(self):

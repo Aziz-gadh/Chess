@@ -11,3 +11,11 @@ white_square_color='#EEEED2'
 white_square_color_selected='#F5F682'
 margin=(40,80)
 grid=[]
+openMnt=[]
+selectedPiece=None
+state=0
+# state=0b11234
+# 1: 00 plying | 01 white wins | 10 black wins | 11 draw 
+# 2: 0 no check | 1 check
+# 3: 0 didn't select | 1 selected
+# 4: 0 white to play | 1 black to play

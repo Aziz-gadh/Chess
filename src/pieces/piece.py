@@ -24,3 +24,8 @@ class Piece(pg.sprite.Sprite,ABC):
         for square in self.freedom:
             square.unselect()
         self.selected=False
+    def move(self,square):
+        self.square.piece=None
+        self.rect=square.rect
+        self.square=square
+        square.piece=self

@@ -1,6 +1,6 @@
 import pygame as pg
 from .square import Square
-from .settings import board_side,FPS,board,margin,side,grid,pieces
+from .settings import board_side,FPS,board,margin,side,grid,pieces,state
 from .pieces.rook import Rook
 from .pieces.bishop import Bishop
 from .pieces.queen import Queen
@@ -36,9 +36,10 @@ while running:
             mouse_position=[(pg.mouse.get_pos()[0]-margin[0])//side,(pg.mouse.get_pos()[1]-margin[1])//side]
             if selectSquare==grid[mouse_position[0]][mouse_position[1]]:
                     selectSquare=None
-                    continue
+                    if state & 2:
+                        state-=2
             else:
-                if mouse_position[0] in range(8) and mouse_position[1] in range(8):
+                if mouse_position[0] in range(8) and mouse_position[1] in range(8) and not (state>>5):
                     selectSquare=grid[mouse_position[0]][mouse_position[1]]
                 else:
                     selectSquare=None
