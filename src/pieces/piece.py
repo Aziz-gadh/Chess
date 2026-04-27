@@ -45,5 +45,10 @@ class Piece(pg.sprite.Sprite,ABC):
                 sq.piece.inCheck=True
     @staticmethod
     def defineAll():
+        kings=[]
         for piece in pieces:
+            if piece.type[1]=='k':
+                kings.append(piece)
             piece.freedom=piece.defineMovement(piece.square)
+        for king in kings:
+            king.freedom=king.defineMovement(king.square)

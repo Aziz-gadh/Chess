@@ -30,17 +30,23 @@ class Square(pg.sprite.Sprite):
             state+=2
             openMnt=self.piece.freedom
         elif (state & 2) and self in openMnt:
+            test=state & 4
             selectedPiece.move(self)
+            discardedPiece=self.piece
+            self.piece=selectedPiece
             Piece.defineAll()
             for piece in pieces:
                 piece.check()
-            if selectedPiece.king.inCheck:
+            if (test and selectedPiece.king.inCheck):
                 selectedPiece.move(selectedPiece.prevSpot)
-                state-=2
+                state-=6
+                selectedPiece.prevSpot.piece=selectedPiece
+                self.piece=discardedPiece
+                print(self.piece.king.inCheck)
             else:
-                if self.piece:
+                if discardedPiece:
                     score+=self.piece.value*((-1)**(self.piece.type[0]=='w'))
-                    self.piece.kill()
+                    discardedPiece.kill()
                 state-=2
                 state=state^1
                 Piece.defineAll()
@@ -48,12 +54,11 @@ class Square(pg.sprite.Sprite):
                 self.piece=selectedPiece
                 selectedPiece=None
         elif (state & 2) and self not in openMnt:
-            if not self.piece:
+            if not self.piece or (self.piece.type[0]=='w')^(state & 1):
                 state-=2
             else:
                 self.piece.select()
                 selectedPiece=self.piece
-                state+=2
                 openMnt=self.piece.freedom
 
     def unselect(self):
